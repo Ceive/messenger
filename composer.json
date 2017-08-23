@@ -1,0 +1,17 @@
+{
+    "name": "ceive/messenger",
+    "description": "contact messaging abstract layer",
+    "type": "library",
+    "license": "Apache 2.0",
+    "minimum-stability": "dev",
+    "require": {
+	  "ceive/net-hypertext": "dev-master",
+	  "ceive/net-integrator": "dev-master",
+	  "ceive/user-access-auth": "dev-master"
+	},
+    "autoload" : {
+	  "psr-4": {
+		"Ceive\\Messenger\\": "src/"
+	  }
+	}
+}

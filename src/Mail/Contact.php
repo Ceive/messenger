@@ -1,0 +1,102 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Alexey
+ * Date: 30.12.2015
+ * Time: 22:49
+ */
+namespace Ceive\Messenger\Mail {
+
+
+	/**
+	 * Class Destination
+	 * @package Ceive\Messenger\Messenger\Mail
+	 */
+	class Contact implements ContactInterface{
+
+		/** @var  int */
+		protected $type = self::TYPE_MAIN;
+
+		/** @var  string */
+		protected $name;
+
+		/** @var  string */
+		protected $address;
+
+		/**
+		 * @param int $type
+		 * @return $this
+		 */
+		public function setType($type = self::TYPE_MAIN){
+			$this->type = $type;
+			return $this;
+		}
+
+		/**
+		 * @return int
+		 */
+		public function getType(){
+			return $this->type;
+		}
+
+		/**
+		 * @param string $name
+		 * @return $this
+		 */
+		public function setName($name){
+			$this->name = $name;
+			return $this;
+		}
+
+		/**
+		 * @return string
+		 */
+		public function getName(){
+			return $this->name;
+		}
+
+		/**
+		 * @param mixed $address
+		 * @return $this
+		 */
+		public function setAddress($address){
+			$this->address = $address;
+			return $this;
+		}
+
+		/**
+		 * @return mixed
+		 */
+		public function getAddress(){
+			return $this->address;
+		}
+
+		/**
+		 * @param $contact
+		 * @return Contact
+		 */
+		public static function getContact($contact){
+			if($contact instanceof ContactInterface){
+				return $contact;
+			}elseif(is_string($contact)){
+				$o = new Contact();
+				if(preg_match('@(.+)?<(.+)>@',$contact,$m)){
+					$o->setAddress(trim($m[2]));
+					if($m[1])$o->setName(trim($m[1]));
+				}else{
+					$o->setAddress($contact);
+				}
+				return $o;
+			}elseif(is_array($contact) && isset($contact['address']) && $contact['address']){
+				$contact = new Contact();
+				$contact->setAddress($contact['address']);
+				if(isset($contact['name']))$contact->setName($contact['name']);
+				return $contact;
+			}else{
+				throw new \LogicException('Contact("'.$contact.'") invalid definition');
+			}
+		}
+		
+	}
+}
+
