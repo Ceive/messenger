@@ -20,6 +20,9 @@ namespace Ceive\Messenger\Mail\SMTP {
 	use Ceive\User\AccessAuth\Auth;
 	
 	/**
+	 * TODO $this->{$option} for simplify access
+	 * TODO delimitary implementation from abstraction (sender from provider)
+	 *
 	 * Class SMTP
 	 * @package Ceive\Messenger\Messenger\Mail\SMTP
 	 */

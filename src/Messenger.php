@@ -8,6 +8,7 @@
 namespace Ceive\Messenger {
 	
 	/**
+	 * // todo simplify factory
 	 * Class Messenger
 	 * @package Ceive
 	 */
